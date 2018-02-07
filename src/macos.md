@@ -46,7 +46,9 @@ So, if you don't use the canonical name to install, it'll install the package bu
 
 To make things worse, [https://caskroom.github.io](Casks) aren't listed in `brew list` at all.
 
-There's a [fix coming up](https://github.com/saltstack/salt/pull/45309), but unfortunately it's not released yet (as of 2018-02-07).
+There's a [fix coming up](https://github.com/saltstack/salt/pull/45309), but unfortunately it's not released yet (as of 2018-02-07). 
+I've tried to [patch](https://patch-diff.githubusercontent.com/raw/saltstack/salt/pull/45309.diff) my installation manually with [it](https://github.com/saltstack/salt/pull/45309/files), but the patch won't apply. 
+Maybe I'll just wait and live with error messages lying to my face.
 
 Lastly, I don't think there's enough documentation on how to install from a cask. 
 This causes [all kinds of confusion](https://github.com/saltstack/salt/issues/26414). 
