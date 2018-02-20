@@ -62,3 +62,18 @@ work stuff:
       - caskroom/cask/zoomus
     - taps: caskroom/cask
 ```
+
+## Quirks
+
+### DHCP Server Overrides the Local Hostname
+
+![Screenshot demonstrating the problem](_img/macos-dhcp-hostname-override.png)
+
+I didn't find out _why_ this happens; I suppose the DHCP server delivers the hostname of a previous device that used the same IP address. 
+Note that this happens even though a host name has been set in the System Preferences (Sharing section).
+
+To fix it, the following worked for me:
+
+```sh
+sudo scutil --set HostName whatever
+```
