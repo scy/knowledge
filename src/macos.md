@@ -44,7 +44,7 @@ You can use `gpg`, `gnupg` and even `gpg2` for the same package.
 However, `brew list` will return the canonical name, and `pkg.install` will look in that list to find out whether the installation succeeded. 
 So, if you don't use the canonical name to install, it'll install the package but will then claim that it wasn't installed and return an error.
 
-To make things worse, [https://caskroom.github.io](Casks) aren't listed in `brew list` at all.
+To make things worse, [Casks](https://caskroom.github.io) aren't listed in `brew list` at all.
 
 There's a [fix coming up](https://github.com/saltstack/salt/pull/45309), but unfortunately it's not released yet (as of 2018-02-07). 
 I've tried to [patch](https://patch-diff.githubusercontent.com/raw/saltstack/salt/pull/45309.diff) my installation manually with [it](https://github.com/saltstack/salt/pull/45309/files), but the patch won't apply. 
