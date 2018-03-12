@@ -4,6 +4,17 @@ A language I’m proficient in.
 A language with horrible design errors. 
 A language that can be used professionally nevertheless.
 
+## Getting Good Random Data
+
+I see code that uses `mt_rand()` on an array of characters or something like that way too often. 
+But also a hash over `microtime(true) . gethostname()` isn't really random data.
+
+Using `/dev/urandom` is nearly always a good idea, and I can recommend [my summary of why you don't need `/dev/random` in most cases, and when you do](unix.md#is-devurandom-good-enough) to get rid of some common misconceptions. 
+However, in PHP there's an even easier way, and that's [the `random_bytes()` function](http://php.net/manual/en/function.random-bytes.php), which I can highly recommend. 
+It's available since PHP 7, but if you have some 5.6 code to maintain (or an even older version?) there's a polyfill [paragonie/random_compat](https://github.com/paragonie/random_compat) available all the way down to PHP 5.2.
+
+You can pass its results directly to something like `base64_encode()` or `hash()`, or concatenate it with date and FQDN of your server or whatever to make it even more "unique".
+
 ## Xdebug
 
 ### For PHP 5.6
