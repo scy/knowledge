@@ -16,7 +16,7 @@ As Thomas Hühn explains in his long but interesting article [Myths about /dev/u
 Both are seeded from the system's entropy pool, and (and this is important) **reseeded** over time when new entropy becomes available. 
 The only difference is that `/dev/random` blocks when there is not enough entropy available for (re)seeding.
 
-`/dev/urandom` is _not_ simply seeded with the date and MAC address or whatever, it's seeded using the same entropy that `urandom` is. 
+`/dev/urandom` is _not_ simply seeded with the date and MAC address or whatever, it's seeded using the same entropy that `random` is. 
 This means that as soon as there has been enough entropy available during the uptime of the system _once_ since booting, it's seeded using good random data. 
 (And since Linux stores leftover entropy when shutting down and reuses it when booting, the chance of not having enough randomness is even lower.) 
 And I repeat: 
