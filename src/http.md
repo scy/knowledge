@@ -15,4 +15,4 @@ So, if you're doing token-based authentication, feel free to use `Bearer`.
 ## 401 Unauthorized Requires a `WWW-Authenticate` Header
 
 The headline basically says it all: 
-When your service responds with a `401` status, RFC 7235 Section 3.1 states that it also _"MUST send a WWW-Authenticate header field (Section 4.1) containing at least one challenge applicable to the target resource"_.
+When your service responds with a `401` status, [RFC 7235 Section 3.1](https://tools.ietf.org/html/rfc7235#section-3.1) states that it also _"MUST send a WWW-Authenticate header field (Section 4.1) containing at least one challenge applicable to the target resource"_.
