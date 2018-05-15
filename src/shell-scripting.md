@@ -23,3 +23,13 @@ In POSIX, it denotes the start of a new command.
 Without that, the `:` command would eat everything after it as its parameters.
 
 Thanks to the [Stack Overflow answer that explains the technique](https://stackoverflow.com/a/17623721/417040)!
+
+## Best practices and FAQs
+
+The [shellharden project](https://github.com/anordal/shellharden) has a document on [safe ways to do things in bash](https://github.com/anordal/shellharden/blob/master/how_to_do_things_safely_in_bash.md). 
+In my opinion, it's too bash-centric. 
+You should always try to write scripts that conform to POSIX. 
+If your shell script is _so_ sophisticated that you need bash features like arrays, you maybe should use a "real" programming language anyway.
+
+The [BashPitfalls](http://mywiki.wooledge.org/BashPitfalls) article on Greg's Wiki contains a _lot_ of detailed knowledge. 
+The [BashFAQ](https://mywiki.wooledge.org/BashFAQ) in the same wiki is also very useful.
