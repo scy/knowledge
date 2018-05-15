@@ -33,3 +33,6 @@ If your shell script is _so_ sophisticated that you need bash features like arra
 
 The [BashPitfalls](http://mywiki.wooledge.org/BashPitfalls) article on Greg's Wiki contains a _lot_ of detailed knowledge. 
 The [BashFAQ](https://mywiki.wooledge.org/BashFAQ) in the same wiki is also very useful.
+
+Google has published their [bash style guide](https://google.github.io/styleguide/shell.xml), and yes, it's explicitly about bash. 
+They even disallow the use of `/bin/sh`.
