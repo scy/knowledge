@@ -22,6 +22,8 @@ _Scaling Lean_'s second chapter, _The Back-of-the-Envelope Business Model Test_,
 
 It also suggests increasing your price by not thinking about your costs plus a decent margin, but about the value you provide to your customers.
 
+The third chapter points out that the goal is not reaching a one-time success, for example the first ten customers, but building "a system that outputs a repeatable customer throughput rate, for example ten new customers a week".
+
 ## Quotes
 
 ### Ash Maurya: Scaling Lean
@@ -31,3 +33,5 @@ It also suggests increasing your price by not thinking about your costs plus a d
 * Most entrepreneurs price their products like artists. They struggle to place a fair value on their product and fall back on a cost-based pricing approach […]. A more effective approach is thinking in terms of value-based pricing in which you anchor your pricing not against your cost structure but against the potential value your customers stand to derive from your product. Remember that as long as your customers derive more value from your product than it costs them, it's still a fair transaction.
 * "I know that $200/month might be higher than most other services you are using, but given what you have seen (the demo), if you feel you can build something similar working just half a day a month, then you come out ahead and shouldn't buy our product."
 * A time-boxed traction goal is much more tangible than a revenue goal.
+* It's not enough to measure what your prospects say—you have to measure what they do.
+* The singularity moment of a product is not when you write your first line of code or raise your first round of funding, but when you create your first customer. You go from nothing to creating value.
