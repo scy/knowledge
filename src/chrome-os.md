@@ -21,3 +21,10 @@ And have you tried getting it to work on Windows?
 Ha. Good luck with that …
 
 Oh, and Google even made a [simple, concise document explaining how to do it](https://chromium.googlesource.com/apps/libapps/+/master/nassh/doc/hardware-keys.md) that I’ve basically just could have linked to.
+
+## Compose Key
+
+Google also provides a [Compose Key extension for Chrome OS](https://chrome.google.com/webstore/detail/composekey/iijdllfdmhbmlmnbcohgbfagfibpbgba). 
+The combinations are not configurable, though, although I guess you could fork [the repo](https://github.com/google/extra-keyboards-for-chrome-os/tree/master/composekey) and make your own version of the extension.
+
+Please note that you need to add _US English_ to your Chromebook's languages (if you don't have it already); the generic _English_ language is not sufficient and you won't see _Compose_ in the list of available keyboards.
