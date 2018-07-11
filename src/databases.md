@@ -1,8 +1,22 @@
-# MySQL
+# Database Design and Peculiarities
+
+## In General
+
+### Using "key-set pagination" instead of `OFFSET`
+
+Markus Winand explains in [Paging Through Results](https://use-the-index-luke.com/sql/partial-results/fetch-next-page) an alternative to `SELECT … LIMIT 10 OFFSET 10`: 
+Pagination by modifying the `WHERE` clause to simply skip all results that the previous page has returned.
+
+This requires a deterministic `ORDER BY` and is a bit more complex. 
+Also, you can't simply jump to arbitrary pages. 
+However, in return you get significantly better speed (for higher pages) and stable results: 
+While the results `OFFSET` returns change based when something new is inserted to (or deleted from) the results on previous pages, his method stays stable.
+
+## MySQL
 
 (And MariaDB, I guess.)
 
-## Comparing Strings
+### Comparing Strings
 
 When comparing strings with `=`, it sometimes looks like MySQL is removing (or trimming) spaces on the right side of the string, i.e. `'a' = 'a  '`. 
 This can also lead to the impression that MySQL does a trim on string values when storing them in the database. 
