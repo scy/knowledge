@@ -111,6 +111,17 @@ This will, well, update nothing, but recreate the lock file.
 However, [`nothing` is no special word](https://github.com/composer/getcomposer.org/issues/92), you can also use any other package name that does not exist. 
 The canonical way to do it though is to run `composer update --lock`, which should be available in every version ≥1.5.0.
 
+### Best practices
+
+* Try to _not_ edit `composer.json` by hand.
+  For most of the things you do there, there's also a CLI command, and in my experience using that reduces the chance of Composer getting confused.
+* Try _really_ hard to not edit `composer.lock` by hand. 
+  The only time you should do it is when you have a merge conflict.
+* When you change `composer.json` and/or `composer.lock`, add the command(s) you've used to your commit message. 
+  That way, when your changes cause problems, people can see what you did and have a better chance of fixing it.
+* Don't commit `composer.phar` to your application's repository, because it's quite large (several MB) and you need to update it regularly. 
+  There are better ways to do it, [tiny composer installer](https://github.com/fastbill/tiny-composer-installer) being one of them.
+
 ### When you screw up
 
 One final hint: 
