@@ -2,6 +2,16 @@
 
 … or Golang. A programming language made to do work.
 
+## Good Go Code
+
+Check out [Effective Go](https://golang.org/doc/effective_go.html), [Arne's Styleguide](https://github.com/bahlo/go-styleguide), [Idiomatic Go](https://about.sourcegraph.com/go/idiomatic-go/) and [Writing Great Go Code](https://scene-si.org/2018/07/24/writing-great-go-code/). 
+Some of the (imho) most important takeaways from the latter:
+
+* Think about your packages, where to split things and where _not_ to split them. Don't overcomplicate.
+* Use [pkg/errors](https://github.com/pkg/errors) and `errors.Wrap`, not the standard library.
+* Use a logger package like [sirupsen/logrus](https://github.com/sirupsen/logrus) or [apex/log](https://github.com/apex/log). Try adding the file and line number to each log message (e.g. with `log.SetFlags(log.LstdFlags | log.Lshortfile)`).
+* If you want to make sure that one of your types implements an interface, you can do something like `var _ io.Reader = &YourStruct{}`, which will cause an error if it doesn't implement the interface, but will be optimized away during compilation if everything's fine.
+
 ## Accessing the Mumble Link API for live Guild Wars 2 game data
 
 GW2 exposes real-time per-frame character and camera position data by using [Mumble's Link API](https://wiki.mumble.info/wiki/Link). 
