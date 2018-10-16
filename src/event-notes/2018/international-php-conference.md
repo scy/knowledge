@@ -108,3 +108,30 @@ by Ralf Eggert
 * (talk focuses on differences between the ZE versions and the migration paths, I was hoping to get at least some kind of introduction since I'm new to the framework)
 * check out: [Swoole](https://www.swoole.co.uk/), PHP C extension that provides coroutines for PHP
 * Expressive is the future, Zend Framework has lost momentum
+
+## [Metamorphosis: From Database-Driven to DDD](https://phpconference.com/web-development/metamorphosis-from-database-driven-to-ddd/)
+
+by Julie Lerman
+
+* in DBase, you built databases and put a form on top of it
+* even when using .NET, she was focusing on the data instead of the business domain
+* path to her transformation
+  * ALT.NET vs Entity Framework
+  * start with POCOs
+  * automated tests (TDD came later)
+  * Eric Evan's DDD book
+* the book starts not about programming, but about communicating with clients, about understanding their domain
+* in DDD, it's more about the business logic, and storing and retrieving data becomes more of a secondary concern
+* DDD helps you solving the messy complex things by breaking them down into small, solvable, contained and interconnected problems
+* the book even helps the more "introverted" people by walking them through client conversations
+* strategic design: analyze and model the business problem, identify the best strategies for solving the problem
+* bounded context (against leaky abstractions)
+* ubiquitous language isn't cross-context
+  * use the same words from the time when talking to the client all the way down to the code
+* duplication can be hard to accept, but is required so that changes in one bounded context don't mess up another
+* tactical design: …
+* reducing side-effects of relationships
+  * one-way by default
+  * value objects by default vs 1:1 relationships
+* avoid overkill: not everything needs to be modeled with DDD patterns
+  * if the application is just data in and data out, that's fine as well; keep things simple
