@@ -98,3 +98,13 @@ by Arne Blankerts
 * "public keys for authentication in browsers"
 * supported in Firefox 60+, Chrome 65+ and Edge starting in October
 * needs JavaScript to work
+
+## [Zend\Expressive 3 – The Next Generation](https://phpconference.com/php-development/zendexpressive-3-the-next-generation/)
+
+by Ralf Eggert
+
+* based on PSRs, PSR-7 was the kick-off for the Expressive project, ZE2 focused on PSR-11, ZE3 on PSR-15
+* ZE3 now has components for sessions, CSRF protection and flash messages
+* (talk focuses on differences between the ZE versions and the migration paths, I was hoping to get at least some kind of introduction since I'm new to the framework)
+* check out: [Swoole](https://www.swoole.co.uk/), PHP C extension that provides coroutines for PHP
+* Expressive is the future, Zend Framework has lost momentum
