@@ -86,3 +86,15 @@ by Sebastian Feldmann
 * PSR-15: HTTP request handler and middleware interfaces
 * PSR-14: event managing (draft!)
 * PSR-8: huggable 😂
+
+## [WebAuthn: Passwords are Legacy](https://phpconference.com/performance-security/webauthn-passwords-are-legacy/)
+
+by Arne Blankerts
+
+* (a lot of introduction)
+* HTML5 actually specifies a [`<keygen>` element](https://en.wikipedia.org/wiki/SPKAC) to generate client side certificates
+* (more stuff that's not about WebAuthn either, but about why passwords suck)
+* WebAuthn is an official W3C standard, a sub-spec of FIDO2
+* "public keys for authentication in browsers"
+* supported in Firefox 60+, Chrome 65+ and Edge starting in October
+* needs JavaScript to work
