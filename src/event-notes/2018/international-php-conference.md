@@ -66,3 +66,23 @@ by Arne Blankerts and Sebastian Bergmann
 
 > If you cannot unit-test it, you cannot reuse it.
 > — Sebastian Bergmann
+
+## [Ten standards a PHP developer should know](https://phpconference.com/php-development/10-standards-a-php-developer-should-know/)
+
+by Sebastian Feldmann
+
+* [PHP Framework Interop Group](https://www.php-fig.org/)
+* PSR vs [RFC](https://wiki.php.net/rfc/howto)
+* PSR-1/PSR-2/PSR-12: coding standards
+* PSR-0/PSR-4: autoloading
+  * [`__autoload`](http://php.net/manual/en/function.autoload.php) is deprecated since 7.2
+* PSR-3: logging
+* PSR-6/PSR-16: caching
+  * PSR-16 is "simpler" than PSR6
+* PSR-11: dependency injection container interface
+* PSR-7: HTTP messages
+* PSR-17: HTTP factory interface (to make creating PSR7 objects independent of the framework)
+* PSR-18: HTTP client interface
+* PSR-15: HTTP request handler and middleware interfaces
+* PSR-14: event managing (draft!)
+* PSR-8: huggable 😂
