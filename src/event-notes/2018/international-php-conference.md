@@ -10,7 +10,7 @@ by Maxim Salnikov ([@webmaxru](https://twitter.com/webmaxru))
 
 * PWAs use modern web APIs along with traditional progressive enhancement to create cross-platform applications.
 * more mobile usage than desktop
-* > 50% of the users install zero apps per month
+* more than 50% of the users install **zero** apps per month
 * web technologies on mobile are improving: performance, access to hardware, auth & payments, integration with the OS: [whatwebcando.today](https://whatwebcando.today/)
 * offline PWAs work since Service Worker API
 * Why should we call a PWA an "app" and not a website? There are 3x more mobile web unique visitors compared to app users, but people spend 20x more time in apps than on the web
