@@ -252,7 +252,6 @@ by Stefan Priebsch ([@spriebsch](https://twitter.com/spriebsch))
 
 * interesting words from the introduction: edge site includes
 * I didn't take notes during the introduction
-
 * let's build a new frontend that builds a page based on some snippets of data
 * these snippets are created by components
 * a component publishes content in reaction to an event (push on "publish", change in price etc.)
