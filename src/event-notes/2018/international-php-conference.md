@@ -314,3 +314,21 @@ by Dave Liddament ([@DaveLiddament](https://twitter.com/daveliddament))
 * see also
   * https://medium.com/vimeo-engineering-blog/fixing-code-that-aint-broken-a99e05998c24
   * CircleCI (1500 minutes per month for free)
+
+## [Event-Sourcing vs CRUD](https://phpconference.com/web-architecture/event-sourcing-vs-crud/)
+
+by Golo Roden ([@goloroden](https://twitter.com/goloroden))
+
+* CRUD is so familiar to us that we don't think about it anymore
+* an update loses previous value, a delete loses all values; they are destructive actions
+* it's hard to answer questions about the past
+* event sourcing limits us to create and read; we add to the list of events, but we never remove from it or edit it
+* simple example: bank account with income and expense events
+  * in order to get the balance, all relevant changes have to be _replayed_
+* allows us to in the future answer questions about things that happened in the past
+* you can do _snapshots_ in order to not have to replay everything from the beginning
+* pros: (some obvious ones), semantic expressiveness: your stored events state the _intention_, not only the result
+* cons: (obvious ones), hard to check for uniqueness, GDPR
+* solving GDPR issues
+  * simple idea: don't store anything related to humans directly in the events; instead, store it in another system and just refer to it
+* if your domain isn't "story-telling" and the history isn't relevant, you don't need to use event sourcing
