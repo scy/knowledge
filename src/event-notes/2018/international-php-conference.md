@@ -245,3 +245,30 @@ by Leandro Lages ([@leandrolages](https://twitter.com/leandrolages))
     * check YouTube for talks by Tune
 * developers might be sceptical: where's a successful example?
   * Microsoft is using DDD heavily
+
+## [Performance in a Personalized World](https://phpconference.com/performance-security/performance-in-a-personalized-world/)
+
+by Stefan Priebsch ([@spriebsch](https://twitter.com/spriebsch))
+
+* interesting words from the introduction: edge site includes
+* I didn't take notes during the introduction
+
+* let's build a new frontend that builds a page based on some snippets of data
+* these snippets are created by components
+* a component publishes content in reaction to an event (push on "publish", change in price etc.)
+* now we have a push model
+* what if some of the snippets aren't there?
+  * if the frontend dynamically asks a component to generate the data, we can't generate response times on cache misses anymore
+  * it also makes the system way more complicated
+  * so we don't do that
+  * we just _define_ that the snippets are always there
+* where do we store these snippets?
+  * file system? doesn't work good with parts running on different servers
+  * key-value store: works if you don't have to do "queries" like "all items for user X"
+  * search engine?
+* implementing this kind of push architecture can be hard because of organizational structures
+* instead of personalizing to a single user, why don't you personalize to personas?
+  * many organizations don't even have enough data for per-user personalization
+  * doesn't stop you from personalizing further over time
+* this "new frontend" can of course also proxy the legacy system
+  * the frontend can even replace parts of the legacy page with something from the new push architecture → personalized legacy pages!
