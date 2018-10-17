@@ -6,7 +6,7 @@ These are some notes I took during the talks. They don't necessarily contain eve
 
 ## [Is a new Cross-platform Development Era coming?](https://phpconference.com/web-development/is-a-new-cross-platform-development-era-coming/)
 
-by Maxim Salnikov ([@webmaxru](https://twitter.com/webmaxru))
+by Maxim Salnikov ([@webmaxru](https://twitter.com/webmaxru)), [recording on YouTube](https://youtu.be/QMyo7UVfg_A?t=868)
 
 * PWAs use modern web APIs along with traditional progressive enhancement to create cross-platform applications.
 * more mobile usage than desktop
@@ -111,7 +111,7 @@ by Ralf Eggert
 
 ## [Metamorphosis: From Database-Driven to DDD](https://phpconference.com/web-development/metamorphosis-from-database-driven-to-ddd/)
 
-by Julie Lerman
+by Julie Lerman, [recording on YouTube](https://youtu.be/ndA-00usnS4?t=651)
 
 * in DBase, you built databases and put a form on top of it
 * even when using .NET, she was focusing on the data instead of the business domain
@@ -138,7 +138,7 @@ by Julie Lerman
 
 ## [Angular, React, Vue and Co. – peacefully united thanks to Web Components and Micro Apps](https://phpconference.com/web-architecture/angular-react-vue-and-co-peacefully-united-thanks-to-web-components-and-micro-apps/)
 
-by Manfred Steyer ([@ManfredSteyer](https://twitter.com/ManfredSteyer))
+by Manfred Steyer ([@ManfredSteyer](https://twitter.com/ManfredSteyer)), [recording on YouTube](https://youtu.be/kGwNemiInIw?t=549)
 
 * web components
   * framework independent
