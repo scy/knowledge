@@ -6,7 +6,7 @@ These are some notes I took during the talks. They don't necessarily contain eve
 
 ## [Is a new Cross-platform Development Era coming?](https://phpconference.com/web-development/is-a-new-cross-platform-development-era-coming/)
 
-by Maxim Salnikov ([@webmaxru](https://twitter.com/webmaxru)), [recording on YouTube](https://youtu.be/QMyo7UVfg_A?t=868)
+by Maxim Salnikov ([@webmaxru](https://twitter.com/webmaxru)), [recording](https://youtu.be/QMyo7UVfg_A?t=868), [slides](https://slides.com/webmax/pwa-ijs-2018/)
 
 * PWAs use modern web APIs along with traditional progressive enhancement to create cross-platform applications.
 * more mobile usage than desktop
@@ -27,7 +27,7 @@ by Maxim Salnikov ([@webmaxru](https://twitter.com/webmaxru)), [recording on You
 
 ## [Do you verify your Views?](https://phpconference.com/testing-quality/do-you-verify-your-views/)
 
-by Arne Blankerts and Sebastian Bergmann
+by Arne Blankerts ([@arneblankerts](https://twitter.com/arneblankerts)) and Sebastian Bergmann ([@s_bergmann](https://twitter.com/s_bergmann))
 
 * a view could be a HTML page, XML doc, JSON blob; the markup; a fragment; the data and content shown – or the code that generates them
 * a view is **code**
