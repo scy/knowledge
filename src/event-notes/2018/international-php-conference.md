@@ -135,3 +135,43 @@ by Julie Lerman
   * value objects by default vs 1:1 relationships
 * avoid overkill: not everything needs to be modeled with DDD patterns
   * if the application is just data in and data out, that's fine as well; keep things simple
+
+## [Angular, React, Vue and Co. – peacefully united thanks to Web Components and Micro Apps](https://phpconference.com/web-architecture/angular-react-vue-and-co-peacefully-united-thanks-to-web-components-and-micro-apps/)
+
+by Manfred Steyer ([@ManfredSteyer](https://twitter.com/ManfredSteyer))
+
+* web components
+  * framework independent
+  * there are several standards for them
+    * templates
+    * HTML imports
+      * forget about them, the browser vendors won't import them because there's already ES imports
+    * custom HTML elements
+    * shadow DOM
+  * can be polyfilled down to IE11
+  * simply extend `HTMLElement` and use `attachShadow` and `shadowRoot`
+  * doesn't influence the main DOM
+  * Angular has "Elements" for custom HTML elements, Vue.js has a CLI switch, in React you have to do this by hand
+* micro apps aka micro frontends
+  * basically what's called "microservices" in the backend
+  * increase maintainability, reduce communication overhead
+  * flexible to choose architechtures and frameworks for the apps instead of having to use one for everything
+  * pros: separate deployment, mix different technologies, less coordination, less complexity
+  * cons: distributed system, distributed data, UI composition
+  * UI composition is the important thing to solve
+    * hyperlinks between several tiny single-page applications?
+      * sounds cheap, but e.g. Google does this: there's the menu to switch between SPAs (Gmail, Maps etc.)
+      * simple, but you're losing state, and it's hard to have a consistent UI between them
+    * (SPA based) shell
+      * ugliest way to do this: iframes (but: provides the best amount of isolation!)
+      * bootstrapping several SPAs in one `index.html`
+        * in this case, consider wrapping the apps into web components
+* choosing a solution
+  * do you have shared state and a lot of navigation between applications?
+    * little: use hyperlinks
+    * much: do you have to integrate legacy apps (PHP, Java) or need very strong isolation?
+      * yes: iframes (not so awesome for public websites, you'll not win an award for this though)
+      * no: do you need separate deployments or mix technologies?
+        * yes: try web components to bootstrap several frameworks as web components
+        * no: go with a monolith and libs in a monorepo
+* conclusion: web components allow decoupling from your framework, micro apps allow decoupling teams and projects
