@@ -175,3 +175,73 @@ by Manfred Steyer ([@ManfredSteyer](https://twitter.com/ManfredSteyer)), [record
         * yes: try web components to bootstrap several frameworks as web components
         * no: go with a monolith and libs in a monorepo
 * conclusion: web components allow decoupling from your framework, micro apps allow decoupling teams and projects
+
+## [A Journey Into Strategic Domain Design](https://phpconference.com/agile-devops/a-journey-into-strategic-domain-design/)
+
+by Leandro Lages ([@leandrolages](https://twitter.com/leandrolages))
+
+* Why DDD?
+  * over time without care and consideration, software turns into a ball of mud
+  * it's not only an engineering problem, but also of communication and company structure
+  * if your domain is already complex, your software usually adds complexity to it
+  * how can we decouple this into smaller parts?
+  * problem space: domain, subdomains
+  * solution space: context map, bounded contexts
+  * the language between these should be common: ubiquitous language
+  * tactical patterns: entities, value objects, repositories, factories (mainly code)
+  * strategic patterns: focus on organization structure and technical aspects; not limited to source code
+* Context Mapping
+  * reality map with contexts and models in them
+  * legacy system can be viewed as another context in that map
+  * when you notice that the language is changing, you're most likely in another bounded context
+    * (this is before ubiquitous language)
+  * you can also draw maps for organizational and technical reality
+  * focus on the domain, not on the data, even if you already have technical realities (certain databases etc.)
+  * all bounded contexts usually have upstream and downstream
+* Strategic Patterns
+  * shared kernel
+    * e.g. employee model is common to payroll and HR contexts
+    * but usually in the same subdomain
+  * anticorruption layer
+    * before a model comes into my context, it will go through a layer that does the translation into my language
+    * instead of using another context's language
+  * open host service
+    * on top of anticorruption layer (ACL)
+    * if you use the same ACL between several contexts to a common upstream, instead try to provide a service/translation layer at the upstream
+    * downstreams don't need to implement ACLs anymore
+  * customer/supplier
+  * conformist
+    * similar to customer/supplier, but no communication
+    * usually used if the ACL is expensive to implement
+    * downstreams simply use what upstreams provide
+    * bad if you have it _inside_ of your organization
+  * separate ways
+    * no relation between contexts at all
+    * instead of using a model from another context, you're building your own model
+    * starting point when experimenting (no need to use data from another context, just fake your own)
+  * partnerships
+    * two teams work together to create a common context without upstream/downstream relation between them
+    * usually to create a shared kernel
+* communicating the context map
+  * don't try to find a tool for drawing your context map, just draw on paper or something
+  * you don't need to include _all_ of your company, focus on the important parts
+* never think of the data first!
+* example: Get Your Guide
+  * (I'm not noting down all the details of the example)
+  * trying to create teams on top of _domains_
+  * strategic importance of context maps:
+    * retaining integrity (nobody changes your model in a context)
+    * a plan for attack, how to distribute team
+    * understanding ownership and responsibility
+    * revealing areas of confusion in business workflow
+    * identifying nontechnical obstacles (e.g. team structure)
+    * encourages good communication
+    * helps on-board new starters
+  * DDD is not only for engineers!
+    * you need to involve domain experts, UX people, etc.
+    * event storming is a good method for aligning the company
+* suggestions:
+  * book: Patterns, Principles and Practices of Domain-Driven Design (Scott Millett / Nick Tune)
+    * check YouTube for talks by Tune
+* developers might be sceptical: where's a successful example?
+  * Microsoft is using DDD heavily
