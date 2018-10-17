@@ -272,3 +272,46 @@ by Stefan Priebsch ([@spriebsch](https://twitter.com/spriebsch))
   * doesn't stop you from personalizing further over time
 * this "new frontend" can of course also proxy the legacy system
   * the frontend can even replace parts of the legacy page with something from the new push architecture → personalized legacy pages!
+
+## [Squash Bugs with Static Analysis](https://phpconference.com/php-development/squash-bugs-with-static-analysis/)
+
+by Dave Liddament ([@DaveLiddament](https://twitter.com/daveliddament))
+
+* statis analysis can only tell you that your code is incorrect
+* tests tell you that a particular scenario is working correctly
+* CI and static analysis helps you to reduce the costs of bugs by moving their detection earlier, at least before roll-out
+* tool suggestions
+  * `jakub-onderka/php-parallel-lint`
+  * `composer validate`
+  * `friendsofsymfony/php-cs-fixer`
+  * `jakub-onderka/php-var-dump-check`
+  * `sensiolabs/security-checker`
+  * https://github.com/exakat/php-static-analysis-tools
+* four types of bugs
+  * bug
+  * deferred bug: things that work until you put invalid/unexpected/future values in there
+  * evolvability defect: roughly equivalent to "technical debt"
+  * (false positives)
+    * you can also rewrite your code so that static analysis doesn't trigger, it's often even clearer that way
+* "do you really expect me to fix the 3183 bugs I currently have in the code?"
+  * no, but set these as your baseline
+* static analysis in real time can reduce your bug cost to 0 since you fix it before even writing it
+* but the advanced checks from the IDE are not running in CI
+* other tools: Psalm, Phan, PHPStan
+  * all have levels (strictest to least strict)
+  * "generics" (e.g. `@return Employee[]` instead of just `array`), even syntax `@return array<string,Employee>` to specify key type
+    * key/value syntax currently not understood in PhpStorm?
+    * you can do `@return Employee[]` _and_ `@psalm-return array<string,Employee>`
+    * PSR-5 is being resurrected and will probably advocate that syntax too
+  * ignoring violations
+* reducing the number of bugs
+  * focus on your business logic (strict), not the framework (less strict or not at all)
+  * create wrapper code for calling "faulty" 3rd party code
+* `@psalm-param class-string $name` can for example make sure that a valid class name is passed in
+* `@psalm-assert !null $expression` means "this method will assert that `$expression` is not null"
+* you can use stubs to add annotations to 3rd party libraries
+* Dave will soon publish [sarb](https://github.com/DaveLiddament/sarb), which can create a "baseline" of all problems at one point in time and only shows new one you introduced
+* Psalm also supports `@template` for "real" generics
+* see also
+  * https://medium.com/vimeo-engineering-blog/fixing-code-that-aint-broken-a99e05998c24
+  * CircleCI (1500 minutes per month for free)
