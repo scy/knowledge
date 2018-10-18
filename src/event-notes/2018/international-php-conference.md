@@ -335,9 +335,48 @@ by Golo Roden ([@goloroden](https://twitter.com/goloroden))
 
 ## [AssertTrue(isDecoupled(“my tests”))](https://phpconference.com/testing-quality/asserttrueisdecoupledmy-tests/)
 
-by Dave Liddament
+by Dave Liddament ([@DaveLiddament](https://twitter.com/daveliddament))
 
-_(notes will follow)_
+* we want to reduce development and maintenance costs of the test suite
+* value of tests = (cost of bugs found by suite) - (cost of suite)
+* sometimes you do a small change and half of the test suite fails
+* _coupling_ is the degree to which two objects know about each other
+  * ideally, object A only knows about object B's interface
+  * if it knows internal details, changes in B may force us to change A as well
+  * the more loosely coupled, the easier it is to create a test double for B
+* first example
+  * automated testing via Selenium
+  * request "can we change the layout of page X"? now half of his Selenium tests failed, because they relied on the interface, even if they weren't _testing_ it
+  * UI changes often
+  * reduce coupling to the UI!
+  * idea: page object translates high-level request ("login") to actual UI steps ("find text box, click here, enter this, …)
+    * changes in the UI only require the page object to be updated
+  * request: can we change the page a user goes to after logging in?
+  * idea: introduce a DSL layer with high-level things like"log in", "get score" and talks to correct page objects
+    * tests now contain `assignUserToTeam`, `answerQuestion` etc. and are more decoupled and actually easier to read
+  * lessons:
+    * testing business logic via UI is difficult, time consuming and brittle
+    * introduce layers between tests and software under test
+  * but what happens if we replace the entire site with an app or an API?
+* second example
+  * layered architecture: you want to test the core, the business logic
+  * put a service layer around
+    * the business logic doesn't even know whether it's a web application
+  * the core of course has to know interfaces to things like the payment service or email gateway (e.g. via adaptor)
+  * you might even get rid of the DSL and talk directly to the service layer from the tests
+  * what do we test at UI level?
+    * maybe you don't even need automated UI tests anymore
+  * summary:
+    * testing business logic at integration level is much easier
+    * we need to architect our code to make this possible
+    * but this has other benefits as well
+* third example
+  * we sell our service to different companies, so login now requires username, password and subdomain
+  * tests were putting data directly into the database, this now failed
+  * db should be treated like another third-party service
+  * idea: object mother pattern for users
+  * also: builder pattern (creates user with default values set, you can change to only what you need)
+  * repository pattern for db?
 
 ## [Effective Code Reviews](https://phpconference.com/testing-quality/effective-code-reviews/)
 
@@ -398,3 +437,83 @@ by Frank Sons ([@FrankS](https://twitter.com/FrankS))
 
 > I've seen companies where they don't put all of the developers on the same plane, because if it crashed, the company would go bankrupt.
 > – Frank Sons
+
+## [DDD, event sourcing and CQRS – theory and practice](https://phpconference.com/web-architecture/ddd-event-sourcing-and-cqrs-theory-and-practice/)
+
+by Golo Roden ([@goloroden](https://twitter.com/goloroden))
+
+* example he used: [Never Completed Game](https://www.nevercompletedgame.com/)
+* the hard thing is not to create the game, but to come up with the questions
+  * experts do that
+* language is a core thing: open game, start game, create game?
+* a command will either be fulfilled or denied and cause events
+* you can have the discussion about how to name things with anyone on the team, there's no technology involved
+* in DDD, a thing that has a state and reacts to commands is called an aggregate
+* a word ("game") can mean different things to different people
+  * DDD solves this by introducing a bounded context, and in that context the word has a single, well-defined meaning
+* so the context has a ubiquitous language and one or more contexts
+* event sourcing can be done without DDD, but they play nice with each other, since DDD has events, too
+* CQRS is CQS on the application level
+* CQS means that each method is either a command or a query
+  * this may seem easy, but think of `stack.pop()`
+* so CQRS splits for example an API into a read and a write API
+* joins are expensive, reading is important: 5NF databases are not always the goal
+* have a write and a read database
+  * can now be scaled independently
+* writes to the write DB are pushed to the read DB using a message queue, which of course causes eventual consistency
+
+## [Tales from the wrong end – a maintainer’s story of open source & CVEs](https://phpconference.com/php-development/tales-from-the-wrong-end-a-maintainers-story-of-open-source-cves/)
+
+by Marcus Bointon ([@SynchroM](https://twitter.com/SynchroM))
+
+* presenter is maintainer (not original author) of PHPMailer, really popular package existing since 2001
+* once upon a time: [security issue in PHPMailer](https://github.com/PHPMailer/PHPMailer/issues/903)
+* coordinated disclosure:
+  * someone finds a vulnerability, reports it to vendor
+  * vendor develops and releases patch
+  * vulnerability disclosed
+* PHPMailer: CVE-2016-10033, CVE-2016-10045
+* CVE type alone doesn't tell you a lot, even if it's a remote code execution
+* there's an additional severity rating
+  * the PHPMailer issues were rated 9.8/critical
+* CVE-2016-10033
+  * `$params = sprintf('-f%s', $this->Sender)`
+  * attack string can be a valid email address! so we escape it, right?
+  * `$params = sprintf('-f%s', escapeshellarg($this->Sender))`
+  * before release, someone posted an exploit → we had become a zero-day
+  * so fix was rushed out as 5.2.18
+    * also known as CVE-2016-10045
+* CVE-2016-10045
+  * we think we're doing `$mailcommand . escapeshellarg($param)`
+  * but `mail()` applies `escapeshellcmd()` internally
+  * `escapeshellcmd($command . escapeshellarg($param))`
+  * result is undefined and exploitable
+  * workaround released in PHPMailer 5.2.20
+  * this is fundamentally a PHP bug
+  * we ended up checking whether the escaped version is different than the non-escaped version and if it is, we refuse to use it
+* affected Wordpress, Joomla, Drupal etc; articles in press
+* but comments on handling the vuln were generally positive
+* how did other mailers fix this?
+  * they didn't!
+  * Zend_Mail, SwiftMailer, RoundCube all vulnerable
+  * similar bugs in Python, Ruby, Node
+* researcher wrote a long article about the general vulnerability of PHP's `mail()` function
+* lessons learned
+  * don't use `mail()`, use SMTP to localhost
+  * open source is awesome
+  * when it matters, people will show up to help, it's not all left to you
+  * security researchers and whistleblowers need effective legal protection as a matter of national policy
+* donations to open source?
+  * there's a lot of time, effort and enthusiasm going into it
+  * differentiate between project and personal
+    * PHPMailer could use a code audit
+  * Patreon is great for writers
+    * open source maintainers will almost need to _become_ a writer or regular blogger to benefit from it
+  * PayPal is probably better
+  * make it easy!
+  * his experience: one 0.25 EUR donation, another one with 0.75 EUR and after mentioning it in a talk another one: 9 EUR so that he is now at a nice round 10
+* thanks to
+  * security researches - we need them!
+  * those who comment, submit PRs, review code
+  * everyone providing feedback and bug reports
+  * those that answer questions on Stack Overflow
