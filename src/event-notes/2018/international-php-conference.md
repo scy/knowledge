@@ -554,3 +554,47 @@ by Tina Dreimann ([@tina_3men](https://twitter.com/tina_3men))
   * teams got too big
   * give the teams the time to get rid of legacy!
 * put people into the same team to make them understand each other better (e.g. devs/marketing)
+
+## [Crypto for Everyone – Libsodium in PHP 7.2](https://phpconference.com/php-development/crypto-for-everyone-libsodium-in-php-7-2/)
+
+by Marcus Bointon ([@SynchroM](https://twitter.com/SynchroM))
+
+> If you type `mcrypt` in your editor, stop. You're doing it wrong.
+> – Marcus Bointon
+
+* crypto functions by number of keys involved
+  * 0 keys: hashes, PRNGs, key derivation
+  * 1 key: MACs, secret key encryption
+  * 2 keys: key exchange, public key encryption, digital signatures
+* core & extension crypto in PHP: mhash, mcrypt, openssl, pecl-gnupg, hash, pecl-scrypt, password_hash, hash_equals, CSPRNG, pecl-libsodium, sodium
+* so sodium came into PHP 7.2 after being available as a PECL extension since 5.6
+* OpenSSL is okay, depending on which part of it you're using
+* libraries: zend-crypt is okay, phpseclib is based on mcrypt, don't use it
+  * sodium_compat is libsodium reimplemented in PHP
+  * ciphersweet allows searches on encrypted data
+* libsodium is a fork of NaCl, supported on more platforms (also in JS and WASM), multiple language bindings, audited code
+* NaCl is by DJB, Tanja Lange etc., libsodium by Frank Denis (pure-ftpd), Scott Arciszewski
+* sodium takes away choices so that you can't choose the wrong thing
+* side channel attacks: timing, thermal, RF emissions, light, sound power (Spectre/Meltdown, password hash timing, Ethernet switch LEDs connected to the data lines)
+  * instead of `WHERE email='…' AND password='…'`, do the comparison in PHP, but use `password_verify` instead of a string comparison, which will return early on the first character mismatch
+  * or `sodium_crypto_pwhash_str_verify`
+* SHA-512 is more efficient on a 64-bit processor than SHA-256
+* Argon2i is resistant against timing attacks, Argon2d against GPUs/parallelization, Argon2id against both
+* when writing new apps, use the best hash currently available (rehash on login to upgrade)
+* hashing with sodium
+  * `sodium_crypto_shorthash` for verification and non-crypto purposes
+  * `sodium_crypto_generichash` (uses e.g. BLAKE2b)
+  * `sodium_crypto_pwhash_str` for passwords (e.g. Argon2id)
+* message authentication codes
+  * `sodium_crypto_auth`, `sodium_crypto_auth`
+* the CSPRNG in PHP7 is good, which is why sodium doesn't replace it
+* secret-key encryption
+  * `sodium_crypto_secretbox_*` for combined encrypt-then-MAC
+  * `sodium_crypto_aead_*` (authenticated encryption with associated data)
+  * ChaCha20-Poly1305 is efficient on low-power machines, AES256-GCM is basically less efficient, except on most modern processors since it's hardware-accelerated
+* public-key encryption
+  * `sodium_crypto_box_*` functions
+* key derivation: `sodium_crypto_pwhash`
+* key exchange: `sodium_crypto_kx_*`
+* `sodium_memzero` to clear the key etc. from memory
+* `password_hash` in 7.2 supports Argon2i, but requires libargon2, which isn't included by default; will be fixed in 7.3
