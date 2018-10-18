@@ -517,3 +517,40 @@ by Marcus Bointon ([@SynchroM](https://twitter.com/SynchroM))
   * those who comment, submit PRs, review code
   * everyone providing feedback and bug reports
   * those that answer questions on Stack Overflow
+
+## [Working in Autonomous Teams: Why & How](https://phpconference.com/agile-devops/working-in-autonomous-teams-why-how/)
+
+by Tina Dreimann ([@tina_3men](https://twitter.com/tina_3men))
+
+> Control leads to compliance; autonomy leads to engagement.
+> – Daniel Pink
+
+* often autonomy is mistaken for anarchy
+* they work in squads and tribes
+* main reason for that was growth
+* they were in a place were they were slowed down by their size
+* CTO: "I was looking so long for ways to motivate people, and then I realized that I simply have to get out of their way and not _demotivate_ them."
+* diversity: every important role in one team; don't lock developers away in a room
+* growth mindset is everything
+* every team needs their missing & vision
+  * mission should be the north star, never be reachable
+  * vision should be a clear playground, a picture of the "preferred future"
+* self-governing teams set their own objectives & key results
+  * OKRs: ambitious, focused, team-driven, fully integrated
+  * useless if it's not defined by the team together
+  * don't just name a person to do it, you're missing the diversity!
+  * at least have a team discussion
+* advice processes are not optional
+  * before you make a decision, get advice from someone
+  * (even in an autonomous team!)
+* decision making is more than yes or no
+  * difference between consent and consensus
+  * not everyone needs to say yes, they just need to not object
+  * else it slows you down
+* squad size
+  * if you focus on the business priorities, you will be able to do a natural split
+  * try slicing by customer groups
+  * in the beginning they started with fully-stacked teams
+  * teams got too big
+  * give the teams the time to get rid of legacy!
+* put people into the same team to make them understand each other better (e.g. devs/marketing)
