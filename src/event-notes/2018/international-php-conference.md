@@ -332,3 +332,69 @@ by Golo Roden ([@goloroden](https://twitter.com/goloroden))
 * solving GDPR issues
   * simple idea: don't store anything related to humans directly in the events; instead, store it in another system and just refer to it
 * if your domain isn't "story-telling" and the history isn't relevant, you don't need to use event sourcing
+
+## [AssertTrue(isDecoupled(“my tests”))](https://phpconference.com/testing-quality/asserttrueisdecoupledmy-tests/)
+
+by Dave Liddament
+
+_(notes will follow)_
+
+## [Effective Code Reviews](https://phpconference.com/testing-quality/effective-code-reviews/)
+
+by Frank Sons ([@FrankS](https://twitter.com/FrankS))
+
+> Peer code reviews are the single biggest thing you can do to improve your code.
+> – Jeff Atwood
+
+* Why are you doing code reviews? What are you looking for? Can you answer these questions?
+  * cf [Microsoft survey](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/ICSE202013-codereview.pdf)
+* Are you tracking your results? (Fixing right now or later? Different opinions? How successful are your reviews?)
+  * different opinions: Asking a third person to decide may not be helpful (cf Joel Spolsky: "I am the person with the least knowledge about the problem, I won't decide for you")
+* results depend on experience, timing and motivation of the reviewing dev
+* Let's make it effective.
+* mindset
+  * Leave your ego at the door. If nobody will tell you how bad you are, how can you improve?
+  * There's _always_ something that can be improved.
+  * Forget about "your" code. Collective ownership. Share the knowledge. The team is responsible.
+    * If you reviewed code, you should be knowledgeable enough to fix bugs in it later on.
+* Maybe don't do only pull request reviews. Large pull requests will be left lying around the longest.
+  * try team reviews
+  * no longer than 90 minutes
+  * maybe one review meeting per 2-week sprint
+  * don't pick random code, but something that's _important_
+  * don't have the author explain the code: pick someone at random to explain it
+    * solves the problem of people not asking questions
+  * _understand_ every line, especially complicated ones with formulas or something
+* intention
+  * if you're writing an experiment, _learnings_ are more important than quality
+  * if you're writing a payment system, quality and security are more important
+  * pick the right method
+    * for style, pull requests are fine
+    * for finding the best solution, pair programming is probably better, or team reviews
+* create a coding guideline
+  * don't add stuff you can check with tools
+  * let the team create it
+  * it's a living document
+  * how are we going to do things? what are the "best" solutions to things? best practices?
+* keep track of results
+  * make sure you have follow ups, e.g. architectural flaws
+  * don't discuss longer than 5 minutes in the review
+  * not everything needs to be fixed at once
+    * of course, if it just takes you only one minute, do it
+* create a review checklist based on the guideline you've created
+  * "The only difference between screwing around and science is writing it down."
+* reviews are part of the development and shouldn't be second-class citizens
+* don't document what the code is doing, but _why_ it's doing that
+* "yeah this code is complicated but it's working" is no excuse: other people need to _understand_ it in order to be able to fix bugs in it
+* if nodoby can reason _why_ solution A is better than B, it's opinion
+  * otoh, if there is a reason why one of these is better, choose that one
+  * try to not care about things that are opinion
+  * for opinion things, vote as a team, or in the worst case, flip a coin
+* there are studies showing that pair programming is faster
+  * in the beginning it's slower but produces far less bugs
+  * later on it's even faster than doing it on your own _and_ produces less bugs
+  * see Johann Peter Hartmann's [Management Brainfucks](https://de.slideshare.net/johannhartmann/management-brainfucks)
+* try mob programming at some time, but it's not something to do regularly
+
+> I've seen companies where they don't put all of the developers on the same plane, because if it crashed, the company would go bankrupt.
+> – Frank Sons
