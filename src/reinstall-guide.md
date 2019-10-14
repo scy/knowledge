@@ -17,6 +17,10 @@ It's basically not that different from “what to back up”, but less focused o
 * On a Windows machine, are there any **PuTTY private keys**?
 * Do you have the **password to the backup**?
 * Write down or securely store **passwords to auto-unlocking external disks**.
+* Keep **game data** that doesn't live in the cloud, e.g.
+  * screenshots
+  * Elite: Dangerous journals
+  * DS4Windows profiles
 
 Sometimes my machines are backed up automatically, but most aren't.
 That's because I keep most of my work
