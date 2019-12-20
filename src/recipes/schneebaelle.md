@@ -9,6 +9,8 @@ Traditionelles Weihnachtsdessert in meiner Familie.
 
 ## Zutaten
 
+* 5 EL (60 ml) kaltes Wasser
+* 1 Prise Salz
 * 7 Eier
 * 150 g Kokosflocken
 * 2 Päckchen Sahnesteif
@@ -16,7 +18,7 @@ Traditionelles Weihnachtsdessert in meiner Familie.
 * 125 ml Amaretto
 * 150 g Crème fraîche
 * 250 g Magerquark
-* ½ TL Backpulver
+* ½ TL (2 g) Backpulver
 * 200 g Mehl
 * 200 g Zucker für die Biskuit-Basis
 * 50 g Zucker für die Schneebälle
@@ -28,7 +30,7 @@ Traditionelles Weihnachtsdessert in meiner Familie.
 ### Biskuit
 
 * Eier trennen.
-* Eiweiß, Salz und 5 EL kaltes Wasser steif schlagen. Dabei ein Päckchen Vanillezucker und 200 g Zucker einrieseln lassen.
+* Eiweiß, Salz und Wasser steif schlagen. **Währenddessen** ein Päckchen Vanillezucker und 200 g Zucker einrieseln lassen.
 * Eigelb einzeln darunter schlagen.
 * Mehl und Backpulver mischen und unterheben.
 * Auf ein Backblech streichen und im vorgeheizten Backofen bei 175 °C 25–30 Minuten backen.
