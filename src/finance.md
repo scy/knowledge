@@ -5,7 +5,7 @@
 [AqBanking](https://www.aquamaniac.de/rdm/) is a set of tools for talking to German banks using the HBCI and FinTS protocols.
 
 ⚠ **Please note:**
-This tutorial is incomplete.
+This tutorial, which is based on [the official PIN/TAN tutorial](https://www.aquamaniac.de/rdm/projects/aqbanking/wiki/SetupPinTan), is incomplete.
 I couldn't get TANs to work, therefore my AqBanking adventures are currently on hold.
 
 To begin, create a new user.
@@ -47,6 +47,8 @@ If you'd like to store your PIN in an unencrypted text file in order to run some
 ```sh
 aqhbci-tool4 mkpinlist -o gls.pin
 ```
+
+You’ll need to edit that file using your favorite text editor and put the PIN inside.
 
 AqBanking uses what they call a "context file" to store results of requests in a machine-readable (to some degree also human-readable) format.
 Make sure to provide it when calling `aqbanking-cli request` (by supplying the `-c` parameter), else you'll be left with the contents of the context file dumped to stdout with no easy way to query them.
