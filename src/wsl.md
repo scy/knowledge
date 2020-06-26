@@ -79,3 +79,10 @@ If you’d like to go down that road, check out the howtos I’ve linked above.
 
 Maybe `wsl-ssh-pageant` author Ben Pye might be interested to add the `gpg-agent` feature to his tool, since he seems rather active.
 I guess I’ll ask him if I find the time.
+
+### Have GnuPG fix the issue
+
+All these workaround are only necessary because GnuPG does that strange TCP-pointer-file stuff on Windows.
+It’s no longer necessary since `AF_UNIX` sockets are supported under Windows now.
+
+There’s already [issue T3883](https://dev.gnupg.org/T3883) in the GnuPG project, and Werner Koch seems open to doing something about it, but it doesn’t look like somethings’s gonna happen any time soon.
