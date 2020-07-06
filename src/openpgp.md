@@ -2,28 +2,24 @@
 
 ## My 2020 OpenPGP setup
 
-This document is a work in progress and currently more like a collection of notes instead of a full tutorial.
-Feel free to ask questions or suggest edits via GitHub issues.
-I also want to flesh this document out further once I find the time.
-
 A lot of this is based on [Eric Severance’s 2015 tutorial](https://www.esev.com/blog/post/2015-01-pgp-ssh-key-on-yubikey-neo/).
 
 Key features:
 
 * Master key (used for creating/modifying/signing subkeys and the keys of other persons) lives on a separate, airgapped machine.
 * Encryption, decryption and signing happens on a YubiKey, e.g. the YubiKey 5 NFC.
-* The YubiKey also stores an authentication key for SSH.
+* The OpenPGP key on the YubiKey can also be used as your “SSH key”, i.e. a client-side certificate to log you in to remote servers.
 * All of the keys are Ed25519 ones (requires [YubiKey firmware 5.2.3](https://www.yubico.com/blog/whats-new-in-yubikey-firmware-5-2-3/) or higher), not RSA.
 * The encryption subkey is _not_ generated on the YubiKey (but signing and authentication are). This allows us to have a backup, should the YubiKey break down.
 
 ### Building an airgapped machine for key signing
 
 For this, I use a Raspberry Pi.
-You can either boot it, as usual, from an SD card, or improve your defense against evil maid attacks by booting from a hardware-encrypted USB thumb drive with integrated PIN keyboard like the Kensington DataTraveler 2000.
+You can either boot it, as usual, from an SD card, or improve your defense against [evil maid attacks](https://en.wikipedia.org/wiki/Evil_maid_attack) by booting from a hardware-encrypted USB thumb drive with integrated PIN keyboard like the Kensington DataTraveler 2000.
 
 The basic idea is, once this device contains your master key, it can’t ever be connected to any network again.
 Exchanging key material should then only be done using USB drives or other means.
-(Since “rogue USB” attacks against USB stacks exist as well, other ways of exchanging data might be worth exploring, for example RS232 or QR codes.)
+(Since “rogue USB” attacks against USB stacks exist as well, other ways of exchanging data might be worth exploring, for example RS232 or [QR codes](https://github.com/seiferteric/qrtun).)
 
 Flash a boot medium for the Pi and start it, connected to a network.
 Set up locale, timezone, keyboard layout etc. according to your needs.
@@ -176,6 +172,13 @@ Your selection? q
 
 First, generate only the primary key.
 This one will not be used in your day-to-day interactions with GnuPG, but only for modifying subkeys and signing the keys of other people.
+It will exist only on the airgapped Raspberry Pi.
+
+By default, it will have _Sign_ and _Certify_ capabilities, but we’re going to change that to _Certify_ only.
+Basically, _Certify_ is about key management (adding/modifying/revoking subkeys, signing the keys of others etc.) and _Sign_ is about signing emails or files.
+
+Also, [you most likely should leave the “comment” field of your user ID empty](https://debian-administration.org/users/dkg/weblog/97).
+Remember, if you want other people to sign your key, they will need to verify that you are who (and what!) the key says, including the comment.
 
 ```
 $ gpg --expert --full-gen-key
