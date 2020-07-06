@@ -472,7 +472,13 @@ $ . ~/.bashrc
 ```
 
 Next, export the authentication key in SSH format.
-There was a time when there was a utility called `gpgkey2ssh`, but nowadays GnuPG has replaced that tool with a command line option:
+How to actually _use_ this exported key then for authentication is currently beyond the scope of this tutorial.
+Basically, you’d need to add `enable-ssh-support` in `gpg-agent.conf` and then use `gpg-agent` as a replacement for `ssh-agent`.
+Google around, there are lots of howtos.
+
+Also note:
+There was a time when there was a utility called `gpgkey2ssh`, but nowadays GnuPG has replaced that tool with a command line option.
+So, in order to extract the key _and_ replace GnuPG’s default comment that specifies the serial number of your YubiKey with something more human-readable, try this:
 
 ```
 $ gpg --export-ssh-key "$KEYID" | awk '{ print $1, $2, "user@yubikey" }' > ~/$KEYID.pub
