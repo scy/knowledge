@@ -537,3 +537,8 @@ $ gpg --armor --export "$KEYID" > ~/$KEYID.asc
 ```
 
 And this is where the tutorial ends, at least for now.
+
+## Adding a size-optimized photo to your public key
+
+I have just finished writing the tutorial above, which is why, for now, I’ll just link to [Creating a small JPEG photo for your OpenPGP key](https://blog.josefsson.org/2014/06/19/creating-a-small-jpeg-photo-for-your-openpgp-key/) by Simon Josefsson.
+There are some valuable pointers in it.
