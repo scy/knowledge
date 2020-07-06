@@ -178,20 +178,6 @@ First, generate only the primary key.
 This one will not be used in your day-to-day interactions with GnuPG, but only for modifying subkeys and signing the keys of other people.
 
 ```
-gpg --expert --full-gen-key
-(11) ECC (set your own capabilities)
-only Certify
-```
-
-Next, we’ll create an encryption-only subkey.
-We will _not_ generate it on the YubiKey, but on the Raspberry Pi.
-That way, we can have a backup in case the YubiKey is lost or breaks or something.
-
-**Note:** I’m using `@.` here to specify which key to edit.
-This actually means “find a key with an email address that contains `.`”.
-You can only use this if this is a fresh installation of GnuPG and your keyring only contains your own key and no others.
-
-```
 $ gpg --expert --full-gen-key
 gpg (GnuPG) 2.2.12; Copyright (C) 2018 Free Software Foundation, Inc.
 This is free software: you are free to change and redistribute it.
@@ -270,7 +256,17 @@ public and secret key created and signed.
 pub   ed25519 2020-07-05 [C] [expires: 2021-01-01]
       144FEA6B3FF0F6EFD035963B38ACA93052B3EB9A
 uid                      Tim Weber <scy@scy.name>
+```
 
+Next, we’ll create an encryption-only subkey.
+We will _not_ generate it on the YubiKey, but on the Raspberry Pi.
+That way, we can have a backup in case the YubiKey is lost or breaks or something.
+
+**Note:** I’m using `@.` here to specify which key to edit.
+This actually means “find a key with an email address that contains `.`”.
+You can only use this if this is a fresh installation of GnuPG and your keyring only contains your own key and no others.
+
+```
 $ gpg --expert --edit-key @.
 gpg (GnuPG) 2.2.12; Copyright (C) 2018 Free Software Foundation, Inc.
 This is free software: you are free to change and redistribute it.
@@ -343,7 +339,7 @@ $ gpg --export-secret-keys --armor > ~/2020-07-06-secret.asc
 Next, move the encryption key to the YubiKey.
 
 ```
-$gpg --edit-key @.
+$ gpg --edit-key @.
 gpg (GnuPG) 2.2.12; Copyright (C) 2018 Free Software Foundation, Inc.
 This is free software: you are free to change and redistribute it.
 There is NO WARRANTY, to the extent permitted by law.
