@@ -113,7 +113,7 @@ Sex ((M)ale, (F)emale or space): m
 KDF hashes your PIN, so that it’s no longer transferred in plain text via USB or NFC when communicating with the YubiKey.
 This sounds good in theory, but currently, software support is poor:
 
-* Yubico’s own `ykman` doesn’t support it in the current 3.1.1 version, keeping you from setting touch policies etc using `ykman openpgp set-touch`. It will probably be included in the next release though, see [#279](https://github.com/Yubico/yubikey-manager/issues/279) and [#325](https://github.com/Yubico/yubikey-manager/pull/325).
+* Yubico’s own `ykman` doesn’t support it in the current 3.1.1 version, keeping you from setting touch policies etc using `ykman openpgp set-touch` and causing “invalid admin PIN” errors which could possibly force you to reset the YubiKey. It will probably be included in the next release though, see [#279](https://github.com/Yubico/yubikey-manager/issues/279) and [#325](https://github.com/Yubico/yubikey-manager/pull/325).
 * The popular Android OpenPGP application OpenKeychain doesn’t support it either. The corresponding issue [#2368](https://github.com/open-keychain/open-keychain/issues/2368) is open for two years now.
 
 Once the KDF situation improves, let me know, and I’ll update this guide accordingly.
