@@ -109,15 +109,16 @@ gpg/card> sex
 Sex ((M)ale, (F)emale or space): m
 ```
 
-Enable KDF (so that hashes of your PIN are transferred to the YubiKey and back instead of a cleartext version).
-This command doesn’t print anything back.
-The only indication is that `KDF setting` will be `on` in the list of values reported by `info`.
+**Do not enable KDF** unless you know what you’re up against.
+KDF hashes your PIN, so that it’s no longer transferred in plain text via USB or NFC when communicating with the YubiKey.
+This sounds good in theory, but currently, software support is poor:
 
-```
-gpg/card> kdf-setup
-```
+* Yubico’s own `ykman` doesn’t support it in the current 3.1.1 version, keeping you from setting touch policies etc using `ykman openpgp set-touch`. It will probably be included in the next release though, see [#279](https://github.com/Yubico/yubikey-manager/issues/279) and [#325](https://github.com/Yubico/yubikey-manager/pull/325).
+* The popular Android OpenPGP application OpenKeychain doesn’t support it either. The corresponding issue [#2368](https://github.com/open-keychain/open-keychain/issues/2368) is open for two years now.
 
-If you think it’s better, configure the YubiKey to ask for the pin for each signature.
+Once the KDF situation improves, let me know, and I’ll update this guide accordingly.
+
+Next, if you think it’s better, configure the YubiKey to ask for the pin for each signature.
 **Note:** This _toggles_ the flag.
 Make sure that the `Signature PIN:` setting in the output of `list` is set to what you want afterwards.
 
