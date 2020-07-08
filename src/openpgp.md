@@ -117,6 +117,9 @@ This sounds good in theory, but currently, software support is poor:
 * The popular Android OpenPGP application OpenKeychain doesn’t support it either. The corresponding issue [#2368](https://github.com/open-keychain/open-keychain/issues/2368) is open for two years now.
 * GnuPG itself apparently [doesn’t update the PINs automatically after enabling KDF](https://dev.gnupg.org/T3891), which is something between messy and dangerous.
 
+Also, enabling KDF is a one-way street:
+As far as I know, the only way to disable it again is by resetting the YubiKey’s OpenPGP section (i.e. the `gnupg --edit-card` subcommand `factory-reset`).
+
 Once the KDF situation improves, let me know, and I’ll update this guide accordingly.
 
 Next, if you think it’s better, configure the YubiKey to ask for the pin for each signature.
