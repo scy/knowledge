@@ -76,9 +76,22 @@ Yay open source.
 
 This means that if you’d like to use `npiperelay`, you’ll have to download the source (preferably [Lex’s branch](https://github.com/Lexicality/wsl-relay/tree/libassuan), I guess), compile it from source (instructions are provided) and use that.
 If you’d like to go down that road, check out the howtos I’ve linked above.
+The gist of it is this:
 
-Maybe `wsl-ssh-pageant` author Ben Pye might be interested to add the `gpg-agent` feature to his tool, since he seems rather active.
-I guess I’ll ask him if I find the time.
+```sh
+apt install golang socat
+git clone https://github.com/Lexicality/wsl-relay.git
+cd wsl-relay
+git checkout libassuan
+go get ./...
+GOOS=windows go build -o /mnt/c/Users/scy/Software/npiperelay.exe .
+socat UNIX-LISTEN:$(gpgconf --list-dirs agent-socket),fork, EXEC:"/mnt/c/Users/scy/Software/npiperelay.exe -ei -ep -s -a \"$(cmd.exe /c echo %APPDATA% 2>/dev/null | tr '\\' / | tr -d '\r')/gnupg/S.gpg-agent\"",nofork
+```
+
+(I might have a look at further automating this soon™.)
+
+Also, maybe `wsl-ssh-pageant` author Ben Pye might be interested to add the `gpg-agent` feature to his tool, since he seems rather active.
+I could ask him if I find the time.
 
 ### Have GnuPG fix the issue
 
