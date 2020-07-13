@@ -12,6 +12,18 @@ Key features:
 * All of the keys are Ed25519 ones (requires [YubiKey firmware 5.2.3](https://www.yubico.com/blog/whats-new-in-yubikey-firmware-5-2-3/) or higher), not RSA.
 * The encryption subkey is _not_ generated on the YubiKey (but signing and authentication are). This allows us to have a backup, should the YubiKey break down.
 
+### Alternatives
+
+Before you start doing this because just because you want to use your YubiKey for authentication:
+There’s also [yubikey-agent](https://github.com/FiloSottile/yubikey-agent) by the well-known Filippo Valsorda, which uses the PIV section of modern YubiKeys instead.
+He also wrote about why he’s [giving up on PGP](https://blog.filippo.io/giving-up-on-long-term-pgp/); it’s definitely an interesting read.
+If you don’t have other places where you’re using OpenPGP, consider ditching it altogether.
+
+Recent versions of OpenSSH have [FIDO2 support](https://buttondown.email/cryptography-dispatches/archive/cryptography-dispatches-openssh-82-just-works/) now, but introduce a new keytype for it.
+Thus, you also need a recent SSH version on the server, and that can become an issue.
+As of 2020-07, GitHub doesn’t support it yet, for instance.
+But, if you go down that road, you might consider using getting an open source [SoloKey](https://solokeys.com/) instead (because recent YubiKeys are not completely open source anymore).
+
 ### Building an airgapped machine for key signing
 
 For this, I use a Raspberry Pi.
