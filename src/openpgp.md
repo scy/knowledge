@@ -45,6 +45,8 @@ cert-digest-algo SHA512
 
 ### Setting up the YubiKey
 
+#### Key types
+
 Run `gpg --edit-card` to modify the YubiKey’s OpenPGP settings.
 An interactive prompt will appear.
 The first command you enter there should be `admin`; it unlocks all of the commands.
@@ -91,6 +93,8 @@ Your selection? 1
 The card will now be re-configured to generate a key of type: ed25519
 ```
 
+#### Metadata
+
 Next, enter some basic data about yourself.
 Note that the “language preference” is defined as up to four two-byte lower-case ISO 639-1 language codes.
 So, if your most preferred language is German (`de`), followed by English (`en`), you should set your language preference to `deen`.
@@ -102,12 +106,19 @@ gpg/card> name
 Cardholder's surname: Weber
 Cardholder's given name: Tim
 
+gpg/card> login
+Login data (account name): scy
+
 gpg/card> lang
 Language preferences: deen
 
 gpg/card> sex
 Sex ((M)ale, (F)emale or space): m
 ```
+
+Recent GnuPG versions call the `sex` command `salutation` instead. `<3`
+
+#### Security features
 
 **Do not enable KDF** unless you know what you’re up against.
 KDF hashes your PIN, so that it’s no longer transferred in plain text via USB or NFC when communicating with the YubiKey.
@@ -128,49 +139,6 @@ Make sure that the `Signature PIN:` setting in the output of `list` is set to wh
 
 ```
 gpg/card> forcesig
-```
-
-If you didn’t do it already, now would be a good time to change the PIN (default `123456`) and admin PIN (default `12345678`).
-(Or, if you’re about to set a loooong admin PIN, maybe wait until you’ve created the keys below.)
-Both are not limited to numbers!
-You can usually enter up to 127 bytes of UTF-8.
-
-There’s also the “unblock” feature where you can set a “reset code”.
-As far as I understand it, it allows to to set a code that can _only_ be used to reset a blocked PIN.
-This could be useful if you want to allow someone to reset the PIN without disclosing the admin PIN.
-I chose not to use it.
-
-```
-gpg/card> passwd
-gpg: OpenPGP card no. D276000124[…] detected
-
-1 - change PIN
-2 - unblock PIN
-3 - change Admin PIN
-4 - set the Reset Code
-Q - quit
-
-Your selection? 3
-[pin dialog]
-PIN changed.
-
-1 - change PIN
-2 - unblock PIN
-3 - change Admin PIN
-4 - set the Reset Code
-Q - quit
-
-Your selection? 1
-[pin dialog again]
-PIN changed.
-
-1 - change PIN
-2 - unblock PIN
-3 - change Admin PIN
-4 - set the Reset Code
-Q - quit
-
-Your selection? q
 ```
 
 ### Creating the keys
@@ -458,6 +426,65 @@ ssb  ed25519/A8C037AB8AE97089
 gpg> save
 ```
 
+### Finalizing the YubiKey
+
+#### PIN retries
+
+After you enter a wrong user or admin PIN several times in a row, that PIN will be locked.
+If it was the user PIN, you can unlock it using the admin PIN.
+However, if it was the admin PIN, you’ll have to reset the GnuPG part of the YubiKey, using all of the key material.
+
+If you’re like me, you’re fine with the default of three retries for the user PIN, but I prefer a few more tries for the admin PIN.
+
+```
+$ ykman openpgp set-pin-retries 3 1 5
+```
+
+(The reset code is disabled by default and comes with 0 retries, but you the value you set it do needs to be between 1 and 99.)
+
+#### Touch policy
+
+If you want, you can configure the YubiKey to require touches for certain OpenPGP operations.
+This is useful if you want to make sure that a signing operation (or authenticate, or decrypt) is only signing one thing, and that there’s not some kind of malware signing something else without you noticing.
+`ykman openpgp info` will show the current policies:
+
+```
+OpenPGP version: 3.4
+Application version: 5.2.6
+
+PIN tries remaining: 3
+Reset code tries remaining: 0
+Admin PIN tries remaining: 3
+
+Touch policies
+Signature key           Off
+Encryption key          Off
+Authentication key      Off
+Attestation key         Off
+```
+
+You can modify these settings with `ykman openpgp touch` (on older versions of `ykman`) or `ykman openpgp set-touch` (on more recent ones) and set different policies for each type of operation.
+Old versions of `ykman` let you choose between `on`, `off` or `fixed` (where `fixed` means “can’t be changed anymore, except by resetting the OpenPGP part of the YubiKey, deleting all keys”), while newer versions also allow a `cached` setting that will not require another touch up to 15 seconds after the previous operation.
+
+I prefer to require touches for each sign and auth operation, but prefer to allow caching for decryption to support batch operations.
+
+```
+$ ykman openpgp set-touch sig on
+Enter admin PIN:
+Set touch policy of signature key to on? [y/N]: y
+$ ykman openpgp set-touch aut on
+Enter admin PIN:
+Set touch policy of authentication key to on? [y/N]: y
+$ ykman openpgp set-touch enc cached
+Enter admin PIN:
+Set touch policy of encryption key to cached? [y/N]: y
+```
+
+I’m not ready to set any of these to `fixed` yet because I’m scared of forgetting a scenario where it can be cumbersome.
+
+Note that modifying (i.e. creating or replacing) one of the OpenPGP key slots on the YubiKey will apparently reset the touch policy for that key to `off`.
+Therefore you should set them _after_ creating the keys.
+
 ### Publishing the keys
 
 First of all, let’s store the keyid in an environment variable for easy access in the future.
@@ -535,10 +562,57 @@ ssb  ed25519/A8C037AB8AE97089
 gpg> save
 ```
 
+Also, the YubiKey has a metadata field for the public key, too.
+Set it using the `url` command of `gpg --edit-card`.
+
 Then, export the public key and all of its signatures:
 
 ```
 $ gpg --armor --export "$KEYID" > ~/$KEYID.asc
+```
+
+#### Changing the PINs
+
+If you didn’t do it already, now would be a good time to change the PIN (default `123456`) and admin PIN (default `12345678`).
+Both are not limited to numbers!
+You can usually enter up to 127 bytes of UTF-8.
+
+There’s also the “unblock” feature where you can set a “reset code”.
+As far as I understand it, it allows to to set a code that can _only_ be used to reset a blocked PIN.
+This could be useful if you want to allow someone to reset the PIN without disclosing the admin PIN.
+I chose not to use it.
+
+```
+gpg/card> passwd
+gpg: OpenPGP card no. D276000124[…] detected
+
+1 - change PIN
+2 - unblock PIN
+3 - change Admin PIN
+4 - set the Reset Code
+Q - quit
+
+Your selection? 3
+[pin dialog]
+PIN changed.
+
+1 - change PIN
+2 - unblock PIN
+3 - change Admin PIN
+4 - set the Reset Code
+Q - quit
+
+Your selection? 1
+[pin dialog again]
+PIN changed.
+
+1 - change PIN
+2 - unblock PIN
+3 - change Admin PIN
+4 - set the Reset Code
+Q - quit
+
+Your selection? q
 ```
 
 And this is where the tutorial ends, at least for now.
