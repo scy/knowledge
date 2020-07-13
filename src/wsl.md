@@ -118,8 +118,8 @@ I think that should be it for the Windows side of things.
 This is where it gets funny.
 
 1. Install `git`, `golang`, `socat` and `tmux`.
-2. `git clone https://github.com/Lexicality/wsl-relay.git && cd wsl-relay && git checkout libassuan``
-3. `go get ./...` to install the required dependencies, then `GOOS=windows go build -o "$HOME/bin/npiperelay.exe" .` (assuming you have a `~/bin` directory. In contrast to what other tutorials say, `npiperelay` doesn’t have to be stored in your Windows filesystem (i.e. under `/mnt/c`); the WSL filesystem is just fine. (Technically, the WSL filesystem lives in your Windows filesystem anyway.)
+2. `git clone https://github.com/Lexicality/wsl-relay.git && cd wsl-relay && git checkout libassuan`
+3. `go get ./...` to install the required dependencies, then `GOOS=windows go build -o "$HOME/bin/npiperelay.exe" .` (assuming you have a `~/bin` directory). In contrast to what other tutorials say, `npiperelay` doesn’t have to be stored in your Windows filesystem (i.e. under `/mnt/c`); the WSL filesystem is just fine. (Technically, the WSL filesystem lives in your Windows filesystem anyway.)
 4. Download the latest [`wsl-ssh-pageant` release](https://github.com/benpye/wsl-ssh-pageant/releases) to `~/bin/wsl-ssh-pageant.exe`.
 
 You have all of the required ingredients now.
@@ -144,6 +144,8 @@ Run it like this, for example, from your `.bashrc`:
 ```sh
 tmux new-session -d -s wsl-gpg-agent wsl-gpg-agent.sh >/dev/null 2>&1
 ```
+
+(Using a systemd user unit would be an alternative, but since this is WSL1, there’s no systemd.)
 
 Also, while editing the `.bashrc`, don’t forget to tell SSH where to find the socket.
 My script puts it in your Windows `gnupg` directory, e.g. `/mnt/c/Users/scy/AppData/Roaming/gnupg/S.wsl-ssh-pageant`, and if you do it like that, you can use a `.bashrc` line like this:
