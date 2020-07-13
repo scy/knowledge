@@ -10,9 +10,9 @@ Also, I simply lack the time right now to update.
 ## Using GnuPG and SSH with a smartcard (e.g. YubiKey)
 
 Setting up a YubiKey to use it under WSL is not a particularly easy task, but it’s manageable.
-There are some good articles that explain how to set everything up:
+There are some good articles that I’ve used as a basis:
 [Yubikey, gpg, ssh and WSL2](https://blog.nimamoh.net/yubi-key-gpg-wsl2/) (although I don’t see anything specific to version 2 of WSL there) and the even larger one [How to use GPG with YubiKey (bonus: WSL)](https://codingnest.com/how-to-use-gpg-with-yubikey-wsl/) explain the setup hands-on.
-I’ll show you my setup further down below, but first, let’s talk about the issues.
+I’ll show you [my setup](#my-setup) further down below, but first, let’s talk about the issues.
 
 ### What’s the problem?
 
